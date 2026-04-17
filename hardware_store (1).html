@@ -498,6 +498,44 @@
       .stats { grid-template-columns: repeat(2,1fr); }
       .stat-item:nth-child(2) { border-right: none; }
     }
+    
+    .video-container {
+      max-width: 1200px;
+      margin: 0 auto 4rem auto; 
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 30px rgba(123, 47, 255, 0.1);
+      transition: border-color 0.3s;
+    }
+
+    .video-container:hover {
+      border-color: var(--accent2);
+    }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; 
+      height: 0;
+    }
+
+    .video-wrapper iframe, 
+    .video-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-info {
+      padding: 1.5rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
   </style>
 </head>
 <body>
@@ -796,6 +834,23 @@
   </div>
 </section>
 
+<section style="padding: 0 3rem 2rem 3rem;">
+  <div class="video-container">
+    <div class="video-wrapper">
+      <iframe 
+        src="video.mp4" 
+        title="Hardware Showcase" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="video-info">
+      <span class="card-cat" style="display: block; margin-bottom: 0.5rem;">Explora el Rendimiento</span>
+      <h3 style="font-family: 'Orbitron', sans-serif; font-size: 1.2rem;">Hardware de Próxima Generación en Acción</h3>
+    </div>
+  </div>
+</section>
+  
 <section style="padding: 2rem 3rem;">
   <div class="promo-banner">
     <div class="promo-text">
