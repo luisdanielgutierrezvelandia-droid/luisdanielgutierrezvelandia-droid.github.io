@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXCORE — Almacenamiento HDD Externo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+    <style>
+        :root{--bg-body:#05080f;--bg-card:#0c1120;--surface-img:#111827;--border:#1e2d4a;--accent:#00e5ff;--accent-purple:#7b2fff;--text-main:#e8edf5;--text-muted:#7a8aaa;--glow-cian:0 0 15px rgba(0,229,255,0.4);--font-titles:'Orbitron',sans-serif;--font-body:'DM Sans',sans-serif;}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        body{background-color:var(--bg-body);color:var(--text-main);font-family:var(--font-body);padding:2rem;min-height:100vh;}
+        body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.02) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;z-index:0;}
+        .section-header{text-align:center;margin-bottom:3rem;position:relative;z-index:1;}
+        .section-tag{font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent-purple);margin-bottom:0.5rem;display:block;}
+        .section-header h2{font-family:var(--font-titles);font-size:2.2rem;font-weight:900;}
+        .highlight{color:var(--accent);text-shadow:var(--glow-cian);}
+        .hdd-container{display:flex;justify-content:center;gap:2.5rem;max-width:900px;margin:0 auto;position:relative;z-index:1;flex-wrap:wrap;}
+        .hdd-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;width:320px;transition:all 0.3s ease;display:flex;flex-direction:column;overflow:hidden;}
+        .hdd-card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 10px 30px rgba(0,229,255,0.15);}
+        .hdd-img-box{height:220px;background:var(--surface-img);display:flex;justify-content:center;align-items:center;padding:2rem;position:relative;}
+        .hdd-img-box img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 0 10px rgba(0,229,255,0.2));}
+        .hdd-body{padding:1.5rem;}
+        .hdd-brand{font-size:0.65rem;text-transform:uppercase;color:var(--accent);letter-spacing:0.1em;margin-bottom:0.5rem;display:block;}
+        .hdd-name{font-family:var(--font-titles);font-size:1.1rem;margin-bottom:1rem;min-height:2.8rem;}
+        .hdd-specs{list-style:none;font-size:0.85rem;color:var(--text-muted);margin-bottom:1.5rem;}
+        .hdd-specs li{padding:0.4rem 0;border-bottom:1px solid rgba(30,45,74,0.4);display:flex;justify-content:space-between;}
+        .hdd-specs li span{color:var(--text-main);font-weight:500;}
+        .hdd-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:1rem;border-top:1px solid var(--border);}
+        .hdd-price{font-family:var(--font-titles);font-size:1.2rem;color:var(--accent);font-weight:700;}
+        .btn-add{background:var(--accent);color:#000;border:none;padding:0.6rem 1.2rem;font-family:var(--font-titles);font-weight:700;font-size:0.7rem;cursor:pointer;border-radius:2px;transition:0.2s;}
+        .btn-add:hover{opacity:0.9;transform:scale(1.05);}
+    </style>
+</head>
+<body>
+    <div class="section-header">
+        <span class="section-tag">// Massive Storage</span>
+        <h2>Discos <span class="highlight">HDD Externos</span></h2>
+    </div>
+    <div class="hdd-container">
+        <div class="hdd-card">
+            <div class="hdd-img-box"><img src="hdd2.png" alt="Seagate Expansion"></div>
+            <div class="hdd-body">
+                <span class="hdd-brand">Seagate</span>
+                <div class="hdd-name">Seagate Expansion Portable</div>
+                <ul class="hdd-specs">
+                    <li>Capacidad: <span>2 TB</span></li>
+                    <li>Interfaz: <span>USB 3.0</span></li>
+                    <li>Formato: <span>2.5 Pulgadas</span></li>
+                </ul>
+                <div class="hdd-footer">
+                    <span class="hdd-price">$145.000</span>
+                    <button class="btn-add" onclick="ncAddToCart({name:'Seagate Expansion Portable 2TB',category:'HDD Externo',price:145000,img:'hdd2.png'})">Añadir</button>
+                </div>
+            </div>
+        </div>
+        <div class="hdd-card">
+            <div class="hdd-img-box"><img src="hdd1.png" alt="WD Elements" style="filter:hue-rotate(180deg) drop-shadow(0 0 10px rgba(0,229,255,0.2));"></div>
+            <div class="hdd-body">
+                <span class="hdd-brand">Western Digital</span>
+                <div class="hdd-name">WD Elements Desktop</div>
+                <ul class="hdd-specs">
+                    <li>Capacidad: <span>4 TB</span></li>
+                    <li>Interfaz: <span>USB 3.0</span></li>
+                    <li>Compatibilidad: <span>Win / Mac</span></li>
+                </ul>
+                <div class="hdd-footer">
+                    <span class="hdd-price">$249.000</span>
+                    <button class="btn-add" onclick="ncAddToCart({name:'WD Elements Desktop 4TB',category:'HDD Externo',price:249000,img:'hdd1.png'})">Añadir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="cart-helper.js"></script>
+</body>
+</html>

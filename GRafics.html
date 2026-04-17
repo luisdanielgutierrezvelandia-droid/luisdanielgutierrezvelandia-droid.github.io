@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXCORE — Tarjetas Gráficas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+    <style>
+        :root{--bg-body:#05080f;--bg-card:#0c1120;--border:#1e2d4a;--accent:#00e5ff;--accent-purple:#7b2fff;--accent-red:#ff4d6d;--text-main:#e8edf5;--text-muted:#7a8aaa;--glow-cian:0 0 15px rgba(0,229,255,0.4);--font-titles:'Orbitron',sans-serif;--font-body:'DM Sans',sans-serif;}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        body{background-color:var(--bg-body);color:var(--text-main);font-family:var(--font-body);padding:2rem;}
+        body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.02) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;z-index:0;}
+        .section-header{text-align:center;margin-bottom:4rem;position:relative;z-index:1;}
+        .section-tag{font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent-purple);margin-bottom:0.5rem;display:block;}
+        .section-header h2{font-family:var(--font-titles);font-size:clamp(1.8rem,4vw,3rem);font-weight:900;}
+        .section-header h2 .highlight{color:var(--accent);text-shadow:var(--glow-cian);}
+        .gpu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2rem;max-width:1300px;margin:0 auto;position:relative;z-index:1;}
+        .gpu-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:all 0.3s ease;display:flex;flex-direction:column;}
+        .gpu-card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 10px 40px rgba(0,229,255,0.15);}
+        .gpu-display{height:220px;background:#111827;position:relative;display:flex;justify-content:center;align-items:center;padding:1.5rem;overflow:hidden;}
+        .gpu-display img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(var(--glow-cian));z-index:2;}
+        .gpu-display::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at center,rgba(0,229,255,0.1),transparent 70%);}
+        .gpu-badge{position:absolute;top:15px;right:15px;font-family:var(--font-titles);font-size:0.6rem;font-weight:700;padding:0.3rem 0.6rem;border-radius:2px;z-index:3;text-transform:uppercase;}
+        .badge-ultra{background:var(--accent-purple);color:#fff;}.badge-sale{background:var(--accent-red);color:#fff;}
+        .gpu-body{padding:1.5rem;flex:1;display:flex;flex-direction:column;}
+        .gpu-brand{font-size:0.65rem;text-transform:uppercase;color:var(--accent);letter-spacing:0.15em;margin-bottom:0.5rem;}
+        .gpu-name{font-family:var(--font-titles);font-size:1rem;font-weight:700;margin-bottom:1rem;min-height:2.6rem;}
+        .gpu-specs{list-style:none;font-size:0.8rem;color:var(--text-muted);margin-bottom:1.5rem;}
+        .gpu-specs li{padding:0.3rem 0;border-bottom:1px solid rgba(30,45,74,0.3);display:flex;justify-content:space-between;}
+        .gpu-specs li span{color:var(--text-main);font-weight:500;}
+        .gpu-footer{display:flex;align-items:center;justify-content:space-between;padding-top:1rem;border-top:1px solid var(--border);margin-top:auto;}
+        .gpu-price{font-family:var(--font-titles);font-size:1.1rem;font-weight:700;color:var(--accent);}
+        .btn-cart{background:var(--accent);color:#000;border:none;padding:0.6rem 1rem;font-family:var(--font-titles);font-weight:700;font-size:0.7rem;border-radius:2px;cursor:pointer;transition:0.2s;}
+        .btn-cart:hover{box-shadow:var(--glow-cian);transform:scale(1.05);}
+    </style>
+</head>
+<body>
+    <div class="section-header">
+        <span class="section-tag">// Visual Dominance</span>
+        <h2>Tarjetas <span class="highlight">Gráficas</span></h2>
+    </div>
+    <div class="gpu-grid">
+        <div class="gpu-card">
+            <div class="gpu-display">
+                <img src="gR2.png" alt="RTX 4070ti">
+                <span class="gpu-badge badge-ultra">Entusiasta</span>
+            </div>
+            <div class="gpu-body">
+                <span class="gpu-brand">NVIDIA GEFORCE</span>
+                <div class="gpu-name">NVIDIA RTX 4070ti</div>
+                <ul class="gpu-specs">
+                    <li>VRAM: <span>12GB GDDR6X</span></li>
+                    <li>Bus: <span>384-bit</span></li>
+                    <li>DLSS: <span>4.0 Support</span></li>
+                </ul>
+                <div class="gpu-footer">
+                    <span class="gpu-price">$3.890.000</span>
+                    <button class="btn-cart" onclick="ncAddToCart({name:'NVIDIA RTX 4070ti',category:'GPU',price:3890000,img:'gR2.png'})">Comprar</button>
+                </div>
+            </div>
+        </div>
+        <div class="gpu-card">
+            <div class="gpu-display">
+                <img src="gR3.png" alt="RTX 4060">
+                <span class="gpu-badge badge-sale">Popular</span>
+            </div>
+            <div class="gpu-body">
+                <span class="gpu-brand">NVIDIA GEFORCE</span>
+                <div class="gpu-name">NVIDIA RTX 4060</div>
+                <ul class="gpu-specs">
+                    <li>VRAM: <span>8GB GDDR6X</span></li>
+                    <li>Bus: <span>192-bit</span></li>
+                    <li>DLSS: <span>3.5 Support</span></li>
+                </ul>
+                <div class="gpu-footer">
+                    <span class="gpu-price">$1.590.000</span>
+                    <button class="btn-cart" onclick="ncAddToCart({name:'NVIDIA RTX 4060',category:'GPU',price:1590000,img:'gR3.png'})">Comprar</button>
+                </div>
+            </div>
+        </div>
+        <div class="gpu-card">
+            <div class="gpu-display">
+                <img src="gR1.png" alt="RX 7800 XT">
+                <span class="gpu-badge">AMD RDNA 3</span>
+            </div>
+            <div class="gpu-body">
+                <span class="gpu-brand">RADEON SERIES</span>
+                <div class="gpu-name">AMD Radeon RX 7800 XT</div>
+                <ul class="gpu-specs">
+                    <li>VRAM: <span>16GB GDDR6</span></li>
+                    <li>Bus: <span>320-bit</span></li>
+                    <li>FSR: <span>3.0 Ready</span></li>
+                </ul>
+                <div class="gpu-footer">
+                    <span class="gpu-price">$2.449.000</span>
+                    <button class="btn-cart" onclick="ncAddToCart({name:'AMD Radeon RX 7800 XT',category:'GPU',price:2449000,img:'gR1.png'})">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="cart-helper.js"></script>
+</body>
+</html>

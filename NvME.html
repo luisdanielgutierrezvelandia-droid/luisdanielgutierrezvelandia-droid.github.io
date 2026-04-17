@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXCORE — Almacenamiento NVMe M.2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+    <style>
+        :root { --bg-body:#05080f; --bg-card:#0c1120; --surface-img:#111827; --border:#1e2d4a; --accent:#00e5ff; --accent-purple:#7b2fff; --accent-gold:#ffb100; --text-main:#e8edf5; --text-muted:#7a8aaa; --glow-cian:0 0 15px rgba(0,229,255,0.4); --font-titles:'Orbitron',sans-serif; --font-body:'DM Sans',sans-serif; }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        body{background-color:var(--bg-body);color:var(--text-main);font-family:var(--font-body);padding:2rem;}
+        body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.02) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;z-index:0;}
+        .section-header{text-align:center;margin-bottom:3rem;position:relative;z-index:1;}
+        .section-tag{font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent-purple);margin-bottom:0.5rem;display:block;}
+        .section-header h2{font-family:var(--font-titles);font-size:2.2rem;font-weight:900;}
+        .highlight{color:var(--accent);text-shadow:var(--glow-cian);}
+        .nvme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2rem;max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+        .nvme-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;transition:all 0.3s ease;display:flex;flex-direction:column;overflow:hidden;}
+        .nvme-card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 10px 30px rgba(0,229,255,0.15);}
+        .nvme-img-box{height:180px;background:var(--surface-img);display:flex;justify-content:center;align-items:center;padding:1.5rem;position:relative;}
+        .nvme-img-box img{max-width:90%;max-height:80%;object-fit:contain;transform:rotate(-5deg);filter:drop-shadow(0 0 12px rgba(0,229,255,0.2));transition:transform 0.3s ease;}
+        .nvme-card:hover .nvme-img-box img{transform:rotate(0deg) scale(1.05);}
+        .badge-gen{position:absolute;bottom:10px;left:10px;font-size:0.6rem;font-weight:800;padding:0.2rem 0.5rem;border-radius:2px;background:rgba(0,0,0,0.5);border:1px solid var(--border);color:var(--accent);}
+        .nvme-body{padding:1.5rem;}
+        .nvme-type{font-size:0.65rem;text-transform:uppercase;color:var(--accent-purple);letter-spacing:0.1em;margin-bottom:0.5rem;display:block;}
+        .nvme-name{font-family:var(--font-titles);font-size:1rem;margin-bottom:1rem;min-height:2.5rem;}
+        .nvme-specs{list-style:none;font-size:0.8rem;color:var(--text-muted);margin-bottom:1.5rem;}
+        .nvme-specs li{padding:0.4rem 0;border-bottom:1px solid rgba(30,45,74,0.4);display:flex;justify-content:space-between;}
+        .nvme-specs li span{color:var(--text-main);font-weight:600;}
+        .nvme-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:1rem;border-top:1px solid var(--border);}
+        .nvme-price{font-family:var(--font-titles);font-size:1.1rem;color:var(--accent);font-weight:700;}
+        .btn-add{background:var(--accent);color:#000;border:none;padding:0.6rem 1rem;font-family:var(--font-titles);font-weight:700;font-size:0.7rem;cursor:pointer;border-radius:2px;transition:0.2s;}
+        .btn-add:hover{box-shadow:var(--glow-cian);transform:scale(1.05);}
+    </style>
+</head>
+<body>
+    <div class="section-header">
+        <span class="section-tag">// Ultra Fast Storage</span>
+        <h2>Unidades <span class="highlight">NVMe M.2</span></h2>
+    </div>
+    <div class="nvme-grid">
+        <div class="nvme-card">
+            <div class="nvme-img-box">
+                <img src="Nvme1.png" alt="WD Black SN850X">
+                <span class="badge-gen">PCIe 4.0</span>
+            </div>
+            <div class="nvme-body">
+                <span class="nvme-type">High Performance Gamer</span>
+                <div class="nvme-name">WD_BLACK SN850X 1TB</div>
+                <ul class="nvme-specs">
+                    <li>Lectura: <span>7.300 MB/s</span></li>
+                    <li>Escritura: <span>6.300 MB/s</span></li>
+                    <li>Heatsink: <span>No incluido</span></li>
+                </ul>
+                <div class="nvme-footer">
+                    <span class="nvme-price">$429.000</span>
+                    <button class="btn-add" onclick="ncAddToCart({name:'WD_BLACK SN850X 1TB',category:'NVMe M.2',price:429000,img:'Nvme1.png'})">Comprar</button>
+                </div>
+            </div>
+        </div>
+        <div class="nvme-card">
+            <div class="nvme-img-box">
+                <img src="Nvme2.png" alt="Crucial T700">
+                <span class="badge-gen" style="color:var(--accent-gold);border-color:var(--accent-gold);">PCIe 5.0</span>
+            </div>
+            <div class="nvme-body">
+                <span class="nvme-type">Next-Gen Speed</span>
+                <div class="nvme-name">Crucial T700 2TB</div>
+                <ul class="nvme-specs">
+                    <li>Lectura: <span>12.400 MB/s</span></li>
+                    <li>Escritura: <span>11.800 MB/s</span></li>
+                    <li>Heatsink: <span>Premium incl.</span></li>
+                </ul>
+                <div class="nvme-footer">
+                    <span class="nvme-price">$389.000</span>
+                    <button class="btn-add" onclick="ncAddToCart({name:'Crucial T700 2TB',category:'NVMe M.2',price:389000,img:'Nvme2.png'})">Comprar</button>
+                </div>
+            </div>
+        </div>
+        <div class="nvme-card">
+            <div class="nvme-img-box">
+                <img src="Nvme3.png" alt="Kingston NV2">
+                <span class="badge-gen">PCIe 4.0</span>
+            </div>
+            <div class="nvme-body">
+                <span class="nvme-type">Efficiency Series</span>
+                <div class="nvme-name">Kingston NV2 500GB</div>
+                <ul class="nvme-specs">
+                    <li>Lectura: <span>3.500 MB/s</span></li>
+                    <li>Escritura: <span>2.100 MB/s</span></li>
+                    <li>Uso: <span>Office / Home</span></li>
+                </ul>
+                <div class="nvme-footer">
+                    <span class="nvme-price">$229.000</span>
+                    <button class="btn-add" onclick="ncAddToCart({name:'Kingston NV2 500GB',category:'NVMe M.2',price:229000,img:'Nvme3.png'})">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="cart-helper.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXCORE — Mainboards de Alto Rendimiento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+    <style>
+        :root{--bg-body:#05080f;--bg-card:#0c1120;--surface-img:#111827;--border:#1e2d4a;--accent:#00e5ff;--accent-purple:#7b2fff;--accent-red:#ff4d6d;--text-main:#e8edf5;--text-muted:#7a8aaa;--glow-cian:0 0 15px rgba(0,229,255,0.4);--font-titles:'Orbitron',sans-serif;--font-body:'DM Sans',sans-serif;}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        body{background-color:var(--bg-body);color:var(--text-main);font-family:var(--font-body);padding:2rem;min-height:100vh;}
+        body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.02) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;z-index:0;}
+        .section-header{text-align:center;margin-bottom:3rem;position:relative;z-index:1;}
+        .section-tag{font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent-purple);margin-bottom:0.5rem;display:block;}
+        .section-header h2{font-family:var(--font-titles);font-size:2.2rem;font-weight:900;}
+        .highlight{color:var(--accent);text-shadow:var(--glow-cian);}
+        .board-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem;max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+        .board-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;transition:all 0.3s ease;display:flex;flex-direction:column;overflow:hidden;}
+        .board-card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 10px 30px rgba(0,229,255,0.15);}
+        .board-img-box{height:250px;background:var(--surface-img);display:flex;justify-content:center;align-items:center;padding:1.5rem;position:relative;}
+        .board-img-box img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 0 12px rgba(0,229,255,0.2));}
+        .badge{position:absolute;top:15px;right:15px;font-family:var(--font-titles);font-size:0.6rem;font-weight:700;padding:0.3rem 0.6rem;border-radius:2px;text-transform:uppercase;}
+        .badge-premium{background:var(--accent-purple);color:#fff;}
+        .board-body{padding:1.5rem;}
+        .board-socket{font-size:0.65rem;text-transform:uppercase;color:var(--accent);letter-spacing:0.1em;margin-bottom:0.5rem;display:block;}
+        .board-name{font-family:var(--font-titles);font-size:1rem;margin-bottom:1rem;min-height:2.5rem;}
+        .board-specs{list-style:none;font-size:0.8rem;color:var(--text-muted);margin-bottom:1.5rem;}
+        .board-specs li{padding:0.4rem 0;border-bottom:1px solid rgba(30,45,74,0.4);display:flex;justify-content:space-between;}
+        .board-specs li span{color:var(--text-main);font-weight:500;}
+        .board-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:1rem;border-top:1px solid var(--border);}
+        .board-price{font-family:var(--font-titles);font-size:1.2rem;color:var(--accent);font-weight:700;}
+        .btn-buy{background:var(--accent);color:#000;border:none;padding:0.6rem 1rem;font-family:var(--font-titles);font-weight:700;font-size:0.7rem;cursor:pointer;border-radius:2px;transition:0.2s;}
+        .btn-buy:hover{transform:scale(1.05);}
+    </style>
+</head>
+<body>
+    <div class="section-header">
+        <span class="section-tag">// El Corazón de tu Build</span>
+        <h2>Tarjetas <span class="highlight">Madre</span></h2>
+    </div>
+    <div class="board-grid">
+        <div class="board-card">
+            <div class="board-img-box">
+                <img src="Board1.png" alt="ASUS ROG Strix B650E-F">
+                <span class="badge badge-premium">Elite</span>
+            </div>
+            <div class="board-body">
+                <span class="board-socket">Socket AM5 (AMD)</span>
+                <div class="board-name">ASUS ROG Strix B650E-F</div>
+                <ul class="board-specs">
+                    <li>Chipset: <span>AMD Socket AM5</span></li>
+                    <li>Memoria: <span>DDR5 up to 7600MHz</span></li>
+                    <li>WiFi: <span>WiFi 6E / BT 5.2</span></li>
+                </ul>
+                <div class="board-footer">
+                    <span class="board-price">$1.249.000</span>
+                    <button class="btn-buy" onclick="ncAddToCart({name:'ASUS ROG Strix B650E-F',category:'Mainboard',price:1249000,img:'Board1.png'})">Añadir</button>
+                </div>
+            </div>
+        </div>
+        <div class="board-card">
+            <div class="board-img-box"><img src="Board2.png" alt="MSI PRO B760M-A"></div>
+            <div class="board-body">
+                <span class="board-socket">Chipset B760 (Intel)</span>
+                <div class="board-name">MSI PRO B760M-A DDR4</div>
+                <ul class="board-specs">
+                    <li>Chipset: <span>Intel B760</span></li>
+                    <li>Memoria: <span>DDR4 5333+MHz</span></li>
+                    <li>PCIe: <span>Gen 5.0 Support</span></li>
+                </ul>
+                <div class="board-footer">
+                    <span class="board-price">$489.000</span>
+                    <button class="btn-buy" onclick="ncAddToCart({name:'MSI PRO B760M-A DDR4',category:'Mainboard',price:489000,img:'Board2.png'})">Añadir</button>
+                </div>
+            </div>
+        </div>
+        <div class="board-card">
+            <div class="board-img-box"><img src="Board3.png" alt="Gigabyte Z790 AORUS Elite AX"></div>
+            <div class="board-body">
+                <span class="board-socket">Socket LGA 1700 (Intel)</span>
+                <div class="board-name">Gigabyte Z790 AORUS Elite AX</div>
+                <ul class="board-specs">
+                    <li>Chipset: <span>Intel Z790 Express</span></li>
+                    <li>Factor: <span>ATX</span></li>
+                    <li>Puertos: <span>HDMI / DisplayPort</span></li>
+                </ul>
+                <div class="board-footer">
+                    <span class="board-price">$1.490.000</span>
+                    <button class="btn-buy" onclick="ncAddToCart({name:'Gigabyte Z790 AORUS Elite AX',category:'Mainboard',price:1490000,img:'Board3.png'})">Añadir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="cart-helper.js"></script>
+</body>
+</html>

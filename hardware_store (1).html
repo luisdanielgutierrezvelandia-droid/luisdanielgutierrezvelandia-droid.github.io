@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #05080f;
+      --surface: #0c1120;
+      --surface2: #111827;
+      --border: #1e2d4a;
+      --accent: #00e5ff;
+      --accent2: #7b2fff;
+      --accent3: #ff4d6d;
+      --text: #e8edf5;
+      --muted: #7a8aaa;
+      --glow: 0 0 20px rgba(0,229,255,0.3);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(5,8,15,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-shadow: var(--glow);
+    }
+    .logo span { color: var(--accent2); }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.4rem;
+      border-radius: 2px;
+      cursor: pointer;
+      border: none;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { box-shadow: var(--glow); transform: translateY(-1px); }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      overflow: hidden;
+    }
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .orb1 { width: 600px; height: 600px; background: rgba(0,229,255,0.07); top: -100px; left: -150px; }
+    .orb2 { width: 500px; height: 500px; background: rgba(123,47,255,0.08); bottom: -100px; right: -100px; }
+    .hero-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(0,229,255,0.3);
+      padding: 0.35rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+    .hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 .line2 { color: var(--accent); text-shadow: var(--glow); }
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.2rem;
+      border-radius: 2px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(0,229,255,0.4); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.2rem;
+      border-radius: 2px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+    .stats {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+      gap: 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stat-item {
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--accent);
+      display: block;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.06em; }
+
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 3rem;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .section-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+    .section-header h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .section-header p { color: var(--muted); margin-top: 1rem; max-width: 520px; margin-inline: auto; }
+
+    .cat-tabs {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+    .cat-tab {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.4rem;
+      border-radius: 2px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cat-tab.active, .cat-tab:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(0,229,255,0.07);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+      display: none;
+    }
+    .product-card.visible { display: flex; flex-direction: column; }
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,229,255,0.4);
+      box-shadow: 0 8px 40px rgba(0,229,255,0.1);
+    }
+
+    .card-img {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4.5rem;
+      background: var(--surface2);
+      position: relative;
+      overflow: hidden;
+    }
+    .card-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(0,229,255,0.08), transparent 70%);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 12px; right: 12px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+    }
+    .badge-hot { background: var(--accent3); color: #fff; }
+    .badge-new { background: var(--accent2); color: #fff; }
+    .badge-sale { background: #f59e0b; color: #000; }
+
+    .card-body { padding: 1.4rem; flex: 1; display: flex; flex-direction: column; }
+    .card-cat {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+    .card-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 0.6rem;
+    }
+    .card-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; flex: 1; }
+
+    .card-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin: 1rem 0;
+    }
+    .spec-pill {
+      font-size: 0.68rem;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.2);
+      color: var(--accent);
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .card-price {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .card-price .old {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: line-through;
+      font-family: 'DM Sans', sans-serif;
+      display: block;
+      font-weight: 400;
+    }
+    .btn-add {
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      border-radius: 2px;
+      border: none;
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .btn-add:hover { box-shadow: var(--glow); transform: translateY(-1px); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      transition: border-color 0.2s;
+    }
+    .feature-card:hover { border-color: rgba(123,47,255,0.5); }
+    .feature-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .feature-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      color: var(--text);
+    }
+    .feature-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+    .promo-banner {
+      background: linear-gradient(135deg, var(--surface2) 0%, rgba(123,47,255,0.15) 100%);
+      border: 1px solid rgba(123,47,255,0.4);
+      border-radius: 4px;
+      padding: 3rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+    .promo-banner::before {
+      content: '';
+      position: absolute;
+      right: -80px; top: -80px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(123,47,255,0.15), transparent 70%);
+      border-radius: 50%;
+    }
+    .promo-text h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      margin-bottom: 0.5rem;
+    }
+    .promo-text h2 span { color: var(--accent2); }
+    .promo-text p { color: var(--muted); }
+    .countdown { display: flex; gap: 1rem; }
+    .count-block {
+      text-align: center;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.8rem 1.2rem;
+      min-width: 70px;
+    }
+    .count-num {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--accent);
+      display: block;
+      line-height: 1;
+    }
+    .count-label { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      padding: 3rem;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .footer-logo span { color: var(--accent2); }
+    footer p { font-size: 0.8rem; color: var(--muted); }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero > * { animation: fadeInUp 0.7s ease both; }
+    .hero > *:nth-child(2) { animation-delay: 0.1s; }
+    .hero > *:nth-child(3) { animation-delay: 0.2s; }
+    .hero > *:nth-child(4) { animation-delay: 0.3s; }
+    .hero > *:nth-child(5) { animation-delay: 0.4s; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .promo-banner { padding: 2rem; }
+      .stats { grid-template-columns: repeat(2,1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">NEX<span>CORE</span></div>
+</nav>
+
+<div class="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <span class="hero-tag">⚡ Hardware de última generación</span>
+  <h1>
+    Potencia tu sistema<br>
+    <span class="line2">al máximo nivel</span>
+  </h1>
+  <p>Discos SSD, NVMe, M.2, Mainboards, GPUs y RAM de las mejores marcas. Velocidad, confiabilidad y rendimiento para gaming, workstation y servidores.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="document.getElementById('productos').scrollIntoView({behavior:'smooth'})">Ver catálogo</button>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item"><span class="stat-num">500+</span><span class="stat-label">Productos en stock</span></div>
+  <div class="stat-item"><span class="stat-num">24h</span><span class="stat-label">Envío garantizado</span></div>
+  <div class="stat-item"><span class="stat-num">15K+</span><span class="stat-label">Clientes satisfechos</span></div>
+  <div class="stat-item"><span class="stat-num">3 años</span><span class="stat-label">Garantía máxima</span></div>
+</div>
+
+<!-- PRODUCTOS -->
+<section id="productos">
+  <div class="section-header">
+    <span class="section-tag">// Catálogo</span>
+    <h2>Componentes de Alto Rendimiento</h2>
+    <p>Filtra por categoría y encuentra el hardware ideal para tu build</p>
+  </div>
+
+  <div class="cat-tabs">
+    <button class="cat-tab active" onclick="filterProducts('all', this)">Todos</button>
+    <button class="cat-tab" onclick="filterProducts('ssd', this)">SSD SATA</button>
+    <button class="cat-tab" onclick="filterProducts('nvme', this)">NVMe / M.2</button>
+    <button class="cat-tab" onclick="filterProducts('hdd', this)">HDD Externo</button>
+    <button class="cat-tab" onclick="filterProducts('mainboard', this)">Mainboards</button>
+    <button class="cat-tab" onclick="filterProducts('gpu', this)">Tarjetas Gráficas</button>
+    <button class="cat-tab" onclick="filterProducts('ram', this)">Memorias RAM</button>
+  </div>
+
+  <div class="products-grid" id="productGrid">
+
+    <!-- SSD SATA -->
+    <div class="product-card visible" data-cat="ssd">
+      <div class="card-img"><img src="ssd1.png"><span class="card-badge badge-hot">Hot</span></div>
+      <div class="card-body">
+        <span class="card-cat">SSD SATA</span>
+        <div class="card-name">Samsung 870 EVO 1TB</div>
+        <div class="card-desc">SSD SATA III de alta durabilidad con tecnología V-NAND. Ideal para sistemas operativos y aplicaciones.</div>
+        <div class="card-specs">
+          <span class="spec-pill">560 MB/s</span><span class="spec-pill">SATA III</span><span class="spec-pill">1 TB</span><span class="spec-pill">TLC V-NAND</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-price"><span class="old">$189.000</span>$159.000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="ssd">
+      <div class="card-img"><img src="ssd2.png"></div>
+      <div class="card-body">
+        <span class="card-cat">SSD SATA</span>
+        <div class="card-name">Kingston A400 480GB</div>
+        <div class="card-desc">Mejora el arranque de tu equipo con velocidades hasta 10x superiores a un HDD convencional.</div>
+        <div class="card-specs">
+          <span class="spec-pill">500 MB/s</span><span class="spec-pill">SATA III</span><span class="spec-pill">480 GB</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-price">$79.000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="nvme">
+      <div class="card-img"><img src="Nvme1.png"><span class="card-badge badge-new">Nuevo</span></div>
+      <div class="card-body">
+        <span class="card-cat">NVMe M.2</span>
+        <div class="card-name">WD Black SN850X 2TB</div>
+        <div class="card-desc">El SSD gaming definitivo. Diseñado para PS5 y PC de alta gama con PCIe 4.0 y caché inteligente.</div>
+        <div class="card-specs">
+          <span class="spec-pill">7300 MB/s</span><span class="spec-pill">PCIe 4.0</span><span class="spec-pill">M.2 2280</span><span class="spec-pill">2 TB</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-price"><span class="old">$520.000</span>$449.000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="nvme">
+      <div class="card-img"><img src="Nvme2.png"></div>
+      <div class="card-body">
+        <span class="card-cat">NVMe M.2</span>
+        <div class="card-name">Samsung 990 Pro 1TB</div>
+        <div class="card-desc">Rendimiento de clase workstation con PCIe 4.0. Perfecto para edición de video 4K y renderizado 3D.</div>
+        <div class="card-specs">
+          <span class="spec-pill">7450 MB/s</span><span class="spec-pill">PCIe 4.0</span><span class="spec-pill">M.2 2280</span><span class="spec-pill">1 TB</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-price">$389.000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="nvme">
+      <div class="card-img"><img src="Nvme3.png"><span class="card-badge badge-hot">Hot</span></div>
+      <div class="card-body">
+        <span class="card-cat">NVMe M.2</span>
+        <div class="card-name">Seagate FireCuda 530 500GB</div>
+        <div class="card-desc">SSD NVMe compatible con PS5 y PC gaming. Disipador incluido para máximo rendimiento térmico.</div>
+        <div class="card-specs">
+          <span class="spec-pill">7000 MB/s</span><span class="spec-pill">PCIe 4.0</span><span class="spec-pill">TLC NAND</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-price">$229.000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="hdd">
+      <div class="card-img"><img src="hdd1.png"></div>
+      <div class="card-body">
+        <span class="card-cat">HDD Externo</span>
+        <div class="card-name">Seagate Backup Plus 4TB</div>
+        <div class="card-desc">Almacenamiento portátil masivo con USB 3.0. Lleva tus archivos, videos y backups a todas partes.</div>
+        <div class="card-specs">
+          <span class="spec-pill">USB 3.0</span><span class="spec-pill">4 TB</span><span class="spec-pill">2.5"</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-price">$249.000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="hdd">
+      <div class="card-img"><img src="hdd2.png"><span class="card-badge badge-sale">Oferta</span></div>
+      <div class="card-body">
+        <span class="card-cat">HDD Externo</span>
+        <div class="card-name">WD Elements Portable 2TB</div>
+        <div class="card-desc">Compacto, liviano y confiable. Compatible con Windows, Mac y Android. Sin necesidad de fuente externa.</div>
+        <div class="card-specs">
+          <span class="spec-pill">USB 3.0</span><span class="spec-pill">2 TB</span><span class="spec-pill">Plug & Play</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-price"><span class="old">$189.000</span>$145.000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="mainboard">
+      <div class="card-img"><img src="Board1.png"><span class="card-badge badge-new">Nuevo</span></div>
+      <div class="card-body">
+        <span class="card-cat">Mainboard</span>
+        <div class="card-name">ASUS ROG Strix B650E-F</div>
+        <div class="card-desc">Plataforma AM5 de alto rendimiento para procesadores Ryzen 7000. PCIe 5.0, DDR5 y 2× M.2.</div>
+        <div class="card-specs">
+          <span class="spec-pill">AM5</span><span class="spec-pill">DDR5</span><span class="spec-pill">ATX</span><span class="spec-pill">PCIe 5.0</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-price">$1.249.000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="mainboard">
+      <div class="card-img"><img src="Board2.png"></div>
+      <div class="card-body">
+        <span class="card-cat">Mainboard</span>
+        <div class="card-name">MSI PRO B760M-A DDR4</div>
+        <div class="card-desc">Placa micro-ATX para Intel 12va/13va generación. Excelente relación calidad-precio para builds económicos.</div>
+        <div class="card-specs">
+          <span class="spec-pill">LGA1700</span><span class="spec-pill">DDR4</span><span class="spec-pill">mATX</span><span class="spec-pill">PCIe 4.0</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-price">$489.000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="mainboard">
+      <div class="card-img"><img src="Board3.png"><span class="card-badge badge-hot">Hot</span></div>
+      <div class="card-body">
+        <span class="card-cat">Mainboard</span>
+        <div class="card-name">Gigabyte Z790 AORUS Elite AX</div>
+        <div class="card-desc">El centro neurálgico de tu build gaming. WiFi 6E, Thunderbolt 4 y soporte para RAM DDR5 a 7600MHz.</div>
+        <div class="card-specs">
+          <span class="spec-pill">LGA1700</span><span class="spec-pill">DDR5</span><span class="spec-pill">ATX</span><span class="spec-pill">WiFi 6E</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-price">$1.490.000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="gpu">
+      <div class="card-img"><img src="gR2.png"><span class="card-badge badge-hot">Hot</span></div>
+      <div class="card-body">
+        <span class="card-cat">Tarjeta Gráfica</span>
+        <div class="card-name">NVIDIA RTX 4070 Ti 12GB</div>
+        <div class="card-desc">Ray tracing y DLSS 3 para gaming 4K ultra fluido. 4K a más de 60fps en los títulos más exigentes.</div>
+        <div class="card-specs">
+          <span class="spec-pill">12 GB GDDR6X</span><span class="spec-pill">DLSS 3</span><span class="spec-pill">PCIe 4.0</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-price">$3.890.000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="gpu">
+      <div class="card-img"><img src="gR1.png"><span class="card-badge badge-new">Nuevo</span></div>
+      <div class="card-body">
+        <span class="card-cat">Tarjeta Gráfica</span>
+        <div class="card-name">AMD Radeon RX 7800 XT 16GB</div>
+        <div class="card-desc">El rey de 1440p con 16GB de VRAM. Tecnología FSR 3 y soporte nativo para AV1 encoding.</div>
+        <div class="card-specs">
+          <span class="spec-pill">16 GB GDDR6</span><span class="spec-pill">FSR 3</span><span class="spec-pill">PCIe 4.0</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-price"><span class="old">$2.690.000</span>$2.449.000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="gpu">
+      <div class="card-img"><img src="gR3.png"></div>
+      <div class="card-body">
+        <span class="card-cat">Tarjeta Gráfica</span>
+        <div class="card-name">NVIDIA RTX 4060 8GB</div>
+        <div class="card-desc">Gaming 1080p/1440p con DLSS 3 y eficiencia mejorada. La elección inteligente para la gama media.</div>
+        <div class="card-specs">
+          <span class="spec-pill">8 GB GDDR6</span><span class="spec-pill">DLSS 3</span><span class="spec-pill">Ada Lovelace</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-price">$1.590.000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="ram">
+      <div class="card-img"><img src="Ram1.png"><span class="card-badge badge-hot">Hot</span></div>
+      <div class="card-body">
+        <span class="card-cat">Memoria RAM</span>
+        <div class="card-name">Corsair Vengeance DDR5 32GB</div>
+        <div class="card-desc">Kit 2×16GB DDR5-5600MHz con XMP 3.0. RGB sincronizable con iCUE. Lo mejor para plataformas Intel y AMD AM5.</div>
+        <div class="card-specs">
+          <span class="spec-pill">32 GB Kit</span><span class="spec-pill">DDR5</span><span class="spec-pill">5600 MHz</span><span class="spec-pill">RGB</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-price">$589.000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="ram">
+      <div class="card-img"><img src="Ram2.png"></div>
+      <div class="card-body">
+        <span class="card-cat">Memoria RAM</span>
+        <div class="card-name">Kingston Fury Beast DDR4 16GB</div>
+        <div class="card-desc">Kit 2×8GB DDR4-3200MHz. Perfiles XMP 2.0 predefinidos. Compatible con Intel y AMD de última generación.</div>
+        <div class="card-specs">
+          <span class="spec-pill">16 GB Kit</span><span class="spec-pill">DDR4</span><span class="spec-pill">3200 MHz</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-price"><span class="old">$229.000</span>$189.000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="ram">
+      <div class="card-img"><img src="Ram3.png"><span class="card-badge badge-new">Nuevo</span></div>
+      <div class="card-body">
+        <span class="card-cat">Memoria RAM</span>
+        <div class="card-name">G.Skill Trident Z5 64GB RGB</div>
+        <div class="card-desc">Kit 2×32GB DDR5-6400MHz. El arsenal de RAM definitivo para workstations y content creators exigentes.</div>
+        <div class="card-specs">
+          <span class="spec-pill">64 GB Kit</span><span class="spec-pill">DDR5</span><span class="spec-pill">6400 MHz</span><span class="spec-pill">RGB</span>
+        </div>
+        <div class="card-footer">
+          <div class="card-price">$1.290.000</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section style="padding: 2rem 3rem;">
+  <div class="promo-banner">
+    <div class="promo-text">
+      <h2>Oferta <span>Flash</span> — Hasta 30% OFF</h2>
+      <p>En GPUs y almacenamiento NVMe seleccionados. Solo por tiempo limitado.</p>
+    </div>
+    <div class="countdown" id="countdown">
+      <div class="count-block"><span class="count-num" id="ch">08</span><span class="count-label">Horas</span></div>
+      <div class="count-block"><span class="count-num" id="cm">45</span><span class="count-label">Min</span></div>
+      <div class="count-block"><span class="count-num" id="cs">00</span><span class="count-label">Seg</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header">
+    <span class="section-tag">// Por qué elegirnos</span>
+    <h2>Tecnología + Servicio</h2>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🚀</div>
+      <h3>Envío Express</h3>
+      <p>Despacho en 24 horas hábiles a todo el país. Rastreo en tiempo real de tu pedido.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🛡️</div>
+      <h3>Garantía Real</h3>
+      <p>Hasta 3 años de garantía de fábrica. Soporte técnico post-venta sin costo adicional.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔧</div>
+      <h3>Asesoría Técnica</h3>
+      <p>Expertos en hardware disponibles para ayudarte a armar el build perfecto según tu presupuesto.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💳</div>
+      <h3>Pago Flexible</h3>
+      <p>Acepta tarjetas, transferencia, PSE y pago en cuotas sin intereses con bancos seleccionados.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  function filterProducts(cat, btn) {
+    document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.product-card').forEach(card => {
+      if (cat === 'all' || card.dataset.cat === cat) {
+        card.classList.add('visible');
+      } else {
+        card.classList.remove('visible');
+      }
+    });
+  }
+
+  let totalSeconds = 8 * 3600 + 45 * 60;
+  function updateTimer() {
+    const h = Math.floor(totalSeconds / 3600);
+    const m = Math.floor((totalSeconds % 3600) / 60);
+    const s = totalSeconds % 60;
+    document.getElementById('ch').textContent = String(h).padStart(2,'0');
+    document.getElementById('cm').textContent = String(m).padStart(2,'0');
+    document.getElementById('cs').textContent = String(s).padStart(2,'0');
+    if (totalSeconds > 0) totalSeconds--;
+  }
+  updateTimer();
+  setInterval(updateTimer, 1000);
+
+  document.querySelectorAll('.btn-add').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const orig = this.textContent;
+      this.textContent = '✓ Agregado';
+      this.style.background = '#10b981';
+      setTimeout(() => {
+        this.textContent = orig;
+        this.style.background = '';
+      }, 1500);
+    });
+  });
+</script>
+
+</body>
+</html>

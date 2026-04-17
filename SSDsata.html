@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXCORE — Almacenamiento SSD SATA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+    <style>
+        :root{--bg-body:#05080f;--bg-card:#0c1120;--surface-img:#111827;--border:#1e2d4a;--accent:#00e5ff;--accent-purple:#7b2fff;--text-main:#e8edf5;--text-muted:#7a8aaa;--glow-cian:0 0 15px rgba(0,229,255,0.4);--font-titles:'Orbitron',sans-serif;--font-body:'DM Sans',sans-serif;}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        body{background-color:var(--bg-body);color:var(--text-main);font-family:var(--font-body);padding:2rem;min-height:100vh;}
+        body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.02) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;z-index:0;}
+        .section-header{text-align:center;margin-bottom:3rem;position:relative;z-index:1;}
+        .section-tag{font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent-purple);margin-bottom:0.5rem;display:block;}
+        .section-header h2{font-family:var(--font-titles);font-size:2.2rem;font-weight:900;}
+        .highlight{color:var(--accent);text-shadow:var(--glow-cian);}
+        .ssd-container{display:flex;justify-content:center;gap:2rem;max-width:900px;margin:0 auto;position:relative;z-index:1;flex-wrap:wrap;}
+        .ssd-card{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;width:320px;transition:all 0.3s ease;display:flex;flex-direction:column;overflow:hidden;}
+        .ssd-card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 10px 30px rgba(0,229,255,0.15);}
+        .ssd-img-box{height:220px;background:var(--surface-img);display:flex;justify-content:center;align-items:center;padding:2rem;position:relative;}
+        .ssd-img-box img{max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 0 10px rgba(0,229,255,0.2));}
+        .ssd-body{padding:1.5rem;}
+        .ssd-brand{font-size:0.65rem;text-transform:uppercase;color:var(--accent);letter-spacing:0.1em;margin-bottom:0.5rem;display:block;}
+        .ssd-name{font-family:var(--font-titles);font-size:1.1rem;margin-bottom:1rem;min-height:3rem;}
+        .ssd-info{list-style:none;font-size:0.85rem;color:var(--text-muted);margin-bottom:1.5rem;}
+        .ssd-info li{padding:0.4rem 0;border-bottom:1px solid rgba(30,45,74,0.4);display:flex;justify-content:space-between;}
+        .ssd-info li span{color:var(--text-main);font-weight:500;}
+        .ssd-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:1rem;border-top:1px solid var(--border);}
+        .ssd-price{font-family:var(--font-titles);font-size:1.2rem;color:var(--accent);font-weight:700;}
+        .btn-buy{background:var(--accent);color:#000;border:none;padding:0.6rem 1rem;font-family:var(--font-titles);font-weight:700;font-size:0.7rem;cursor:pointer;border-radius:2px;transition:0.2s;}
+        .btn-buy:hover{transform:scale(1.05);}
+    </style>
+</head>
+<body>
+    <div class="section-header">
+        <span class="section-tag">// Almacenamiento Sólido</span>
+        <h2>Discos <span class="highlight">SSD SATA</span></h2>
+    </div>
+    <div class="ssd-container">
+        <div class="ssd-card">
+            <div class="ssd-img-box"><img src="ssd1.png" alt="Samsung 870 EVO"></div>
+            <div class="ssd-body">
+                <span class="ssd-brand">Samsung</span>
+                <div class="ssd-name">870 EVO SATA III</div>
+                <ul class="ssd-info">
+                    <li>Capacidad: <span>500 GB</span></li>
+                    <li>Lectura: <span>560 MB/s</span></li>
+                    <li>Escritura: <span>530 MB/s</span></li>
+                </ul>
+                <div class="ssd-footer">
+                    <span class="ssd-price">$159.000</span>
+                    <button class="btn-buy" onclick="ncAddToCart({name:'Samsung 870 EVO 500GB',category:'SSD SATA',price:159000,img:'ssd1.png'})">Añadir</button>
+                </div>
+            </div>
+        </div>
+        <div class="ssd-card">
+            <div class="ssd-img-box"><img src="ssd2.png" alt="Crucial MX500"></div>
+            <div class="ssd-body">
+                <span class="ssd-brand">Crucial</span>
+                <div class="ssd-name">Crucial MX500 SATA</div>
+                <ul class="ssd-info">
+                    <li>Capacidad: <span>1 TB</span></li>
+                    <li>Lectura: <span>540 MB/s</span></li>
+                    <li>Escritura: <span>500 MB/s</span></li>
+                </ul>
+                <div class="ssd-footer">
+                    <span class="ssd-price">$79.000</span>
+                    <button class="btn-buy" onclick="ncAddToCart({name:'Crucial MX500 1TB',category:'SSD SATA',price:79000,img:'ssd2.png'})">Añadir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="cart-helper.js"></script>
+</body>
+</html>

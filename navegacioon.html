@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-sidebar: #0a101f;
+            --border: #1e2d4a;
+            --accent: #00e5ff;
+            --accent-purple: #7b2fff;
+            --accent-red: #ff4d6d;
+            --text-main: #e8edf5;
+            --text-muted: #7a8aaa;
+            --glow-cian: 0 0 15px rgba(0,229,255,0.4);
+        }
+
+        body {
+            background-color: var(--bg-sidebar);
+            color: var(--text-main);
+            font-family: 'DM Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            border-right: 1px solid var(--border);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .sidebar-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .sidebar-logo span { color: var(--accent-purple); }
+
+        .nav-container {
+            flex: 1;
+            padding: 1rem 0;
+        }
+
+        .nav-section-title {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            padding: 1.2rem 1.2rem 0.5rem;
+            font-weight: 700;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.2rem;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background: rgba(30, 45, 74, 0.4);
+            color: #fff;
+        }
+
+        .nav-item:focus, .nav-item.active {
+            background: rgba(0, 229, 255, 0.05);
+            color: var(--accent);
+            outline: none;
+        }
+        
+        .nav-item:focus::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: var(--accent);
+            box-shadow: var(--glow-cian);
+        }
+
+        .nav-icon {
+            margin-right: 10px;
+            width: 18px;
+            text-align: center;
+        }
+
+        .badge {
+            margin-left: auto;
+            font-size: 0.6rem;
+            font-weight: 900;
+            padding: 2px 5px;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+        .badge-hot { background: var(--accent-red); color: white; }
+        .badge-promo { background: #ff4d6d; color: white; }
+
+        .footer-nav {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        .btn-cotizar {
+            display: block;
+            width: 100%;
+            background: var(--accent);
+            color: #000;
+            text-align: center;
+            padding: 0.7rem;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar-logo">NEX<span>CORE</span></div>
+
+    <div class="nav-container">
+        <a href="hardware_store (1).html" target="pantalla1" class="nav-item">
+            <span class="nav-icon">🏠</span> Inicio
+        </a>
+
+        <div class="nav-section-title">Almacenamiento</div>
+        <a href="SSDsata.html" target="pantalla1" class="nav-item">
+            <span class="nav-icon">💾</span> SSD SATA
+        </a>
+        <a href="NvME.html" target="pantalla1" class="nav-item">
+            <span class="nav-icon">⚡</span> NVMe / M.2 <span class="badge badge-hot">HOT</span>
+        </a>
+        <a href="Hdd.html" target="pantalla1" class="nav-item">
+            <span class="nav-icon">🗄️</span> HDD Externo
+        </a>
+
+        <div class="nav-section-title">Componentes</div>
+        <a href="Board.html" target="pantalla1" class="nav-item">
+            <span class="nav-icon">🖥️</span> Mainboards
+        </a>
+        <a href="GRafics.html" target="pantalla1" class="nav-item">
+            <span class="nav-icon">🎮</span> GPUs
+        </a>
+
+        <div class="nav-section-title">Tienda</div>
+        <a href="EMsambled.html" target="pantalla1" class="nav-item">
+            <span class="nav-icon">🏷️</span> pree ensamblados <span class="badge badge-promo">30% OFF</span>
+        </a>
+    </div>
+
+    <div class="footer-nav">
+        <a href="carrito.html" target="pantalla1" class="btn-cotizar">Cotizar Carrito</a>
+    </div>
+
+</body>
+</html>
